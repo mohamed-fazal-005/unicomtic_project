@@ -1,0 +1,5 @@
+ACCOUNT:1001|fazal|fazal|21000.0
+TRANSACTION:[2025-05-09 10:18:48] Initial deposit: 10000.0
+
+TRANSACTION:[2025-05-09 10:20:04] Received from fazal: 1000.0
+
