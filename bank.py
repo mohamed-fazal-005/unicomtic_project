@@ -57,7 +57,7 @@ def update_account_data(account_data, username):
         while i < len(lines):
             if lines[i].startswith("ACCOUNT:") and f"|{username}|" in lines[i]:
                 found = True
-                updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{account_data['balance']}\n")
+                updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{username}|{account_data['balance']}\n")
                 for txn in account_data['transactions']:
                     updated_lines.append(f"{txn}\n")
                 while i < len(lines) and lines[i]!= "":
@@ -68,7 +68,7 @@ def update_account_data(account_data, username):
                 i += 1
 
         if not found:
-            updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{account_data['balance']}\n")
+            updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{username}|{account_data['balance']}\n")
             for txn in account_data['transactions']:
                 updated_lines.append(f"{txn}\n")
             updated_lines.append("\n")
@@ -87,6 +87,7 @@ def create_user_account():
 
     password = input("Enter password: ")
     with open("users.txt", "a") as file:
+        file.write(f"========================\n")
         file.write(f"{username}|{password}\n")
     print(f"User {username} created successfully.")
 
@@ -102,11 +103,12 @@ def create_user_account():
     account_number = get_next_account_number()
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open("accounts.txt", "a") as file:
+        file.write(f"=========================================\n")
         file.write(f"ACCOUNT:{account_number}|{username}||{initial_balance}\n")
         file.write(f"TRANSACTION:[{now}] Initial deposit: {initial_balance}\n")
         file.write("\n")
 
-    print(f"Account created for {username} with account number {account_number} and initial balance {initial_balance}.")
+    print(f"Account created for : {username} \nwith account number : {account_number} and \ninitial balance : {initial_balance}.")
 
 def users_deta():
     print("\nRegistered Users:")
@@ -148,7 +150,7 @@ def deposit(username):
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         account_data['transactions'].append(f"TRANSACTION:[{now}] Deposited: {amount}")
         update_account_data(account_data, username)
-        print(f"Deposited {amount}. New balance: {account_data['balance']}")
+        print(f"Deposited {amount}. \nNew balance: {account_data['balance']}")
     else:
         print("Account not found.")
 
@@ -169,7 +171,7 @@ def withdraw(username):
             now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             account_data['transactions'].append(f"TRANSACTION:[{now}] Withdrawn: {amount}")
             update_account_data(account_data, username)
-            print(f"Withdrawn {amount}. New balance: {account_data['balance']}")
+            print(f"Withdrawn {amount}. \nNew balance: {account_data['balance']}")
         else:
             print("Insufficient funds.")
     else:
@@ -205,7 +207,7 @@ def transfer_funds(username):
             recipient_account['transactions'].append(f"TRANSACTION:[{now}] Received from {username}: {amount}")
             update_account_data(sender_account, username)
             update_account_data(recipient_account, recipient)
-            print(f"Transferred {amount} to {recipient}. New balance: {sender_account['balance']}")
+            print(f"Transferred {amount} to {recipient}. \nNew balance: {sender_account['balance']}")
         else:
             print("Insufficient funds.")
     else:
@@ -214,7 +216,7 @@ def transfer_funds(username):
 def view_transactions(username):
     account_data = get_account_data(username)
     if account_data:
-        print("\n--- Transaction History ---")
+        print("--- Transaction History ---\n")
         for txn in account_data['transactions']:
             print(txn)
     else:
