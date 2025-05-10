@@ -59,7 +59,7 @@ def update_account_data(account_data, username):
             if lines[i].startswith("ACCOUNT:") and f"|{username}|" in lines[i]:
                 found = True
                 # Replace account line
-                updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{username}|{account_data['balance']}\n")
+                updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{account_data['balance']}\n")
                 # Replace transaction lines
                 for txn in account_data['transactions']:
                     updated_lines.append(f"{txn.strip()}\n")
@@ -78,7 +78,7 @@ def update_account_data(account_data, username):
         # If account not found, add it
         if not found:
             updated_lines.append("=========================================================\n")
-            updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{username}|{account_data['balance']}\n")
+            updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{account_data['balance']}\n")
             for txn in account_data['transactions']:
                 updated_lines.append(f"{txn.strip()}\n")
             updated_lines.append("\n")
