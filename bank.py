@@ -57,7 +57,7 @@ def update_account_data(account_data, username):
         while i < len(lines):
             if lines[i].startswith("ACCOUNT:") and f"|{username}|" in lines[i]:
                 found = True
-                updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{username}|{account_data['balance']}\n")
+                updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{account_data['balance']}\n")
                 for txn in account_data['transactions']:
                     updated_lines.append(f"{txn}\n")
                 while i < len(lines) and lines[i]!= "":
@@ -68,7 +68,7 @@ def update_account_data(account_data, username):
                 i += 1
 
         if not found:
-            updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{username}|{account_data['balance']}\n")
+            updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{account_data['balance']}\n")
             for txn in account_data['transactions']:
                 updated_lines.append(f"{txn}\n")
             updated_lines.append("\n")
