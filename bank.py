@@ -58,19 +58,14 @@ def update_account_data(account_data, username):
         while i < len(lines):
             if lines[i].startswith("ACCOUNT:") and f"|{username}|" in lines[i]:
                 found = True
-                # Replace account line
                 updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{account_data['balance']}\n")
-                # Replace transaction lines
                 for txn in account_data['transactions']:
                     updated_lines.append(f"{txn.strip()}\n")
-                # Skip old transaction lines
                 i += 1
                 while i < len(lines) and lines[i].startswith("TRANSACTION:"):
                     i += 1
-                # Skip any blank line after transaction
                 if i < len(lines) and lines[i].strip() == "":
                     i += 1
-                updated_lines.append("\n")  # Add new separator
             else:
                 updated_lines.append(lines[i])
                 i += 1
