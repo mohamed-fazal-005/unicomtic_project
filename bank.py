@@ -75,7 +75,6 @@ def update_account_data(account_data, username):
                 updated_lines.append(lines[i])
                 i += 1
 
-        # If account not found, add it
         if not found:
             updated_lines.append("=========================================================\n")
             updated_lines.append(f"ACCOUNT:{account_data['account_number']}|{username}|{account_data['balance']}\n")
